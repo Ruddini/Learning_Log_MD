@@ -1,0 +1,25 @@
+{% extends "learning_logs/base.html" %}
+{% load bootstrap4 %}
+
+{% block page_header %}
+    <h3>Dodaj nowy temat:</h3>
+{% endblock page_header %}
+
+{% block content %}
+
+  <div class="bp3-card">
+    <form action="{% url 'learning_logs:new_topic' %}" method="post" class="bp3-card"> <!--Definiowanie formularza HTML
+                                                                      action to miejsce docelowe danych (do funkcji new_topic()-->
+        {% csrf_token %}    <!-- uzyskanie nieautoryzowanego dostępu do serwera(cross-site request forgery)-->
+        {% bootstrap_form form %}
+                            <!-- {-{ form.as_p }} django automatycznie tworzy wszystki pola do formularza (przesłanego z pliku views)
+                                 konieczne jest jedynie podanie zmiennej formularza, 'as_p' nadaje akapity-->
+        {% buttons %}
+          <button name="submit" class="btn btn-primary">Dodaj temat</button>
+        {% endbuttons %}
+
+    </form>
+  </div>
+
+
+{% endblock %}

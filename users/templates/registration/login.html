@@ -1,0 +1,28 @@
+{% extends 'learning_logs/base.html' %}
+{% load bootstrap4 %}
+
+{% block page_header %}
+
+    <h2>Zaloguj się do konta</h2>
+
+{% endblock page_header %}
+
+{% block content %}
+
+    <!-- Ten if jest niepotrzebny bo bootstrap sam to weryfikuje-->
+    {% if form.errors %}
+        <!--W bazie nie ma tej nazwy użytkownika lub nie poprawne hasło-->
+    <p>Nazwa użytkownika i hasło są nieprawidłowe, prosze spróbować ponownie</p>
+    {% endif %}
+
+    <form method="post" action="{% url 'users:login' %}" class="form">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+        <button name="submit" class="btn btn-primary">Zaloguj</button>
+    {% endbuttons %}
+    {# ukryty element formularza, który pokazuje strone na którą ma być przekierowany urzytkownik po logowaniu zakończonym sukcesem #}
+    <input type="hidden" name="next" value="{% url 'learning_logs:index' %}">
+    </form>
+
+{% endblock content %}
