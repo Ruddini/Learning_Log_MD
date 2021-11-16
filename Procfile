@@ -1,1 +1,1 @@
-web: bin/start-pgbouncer-stunnel gunicorn learning_log.wsgi --log-file -
+web: gunicorn learning_log.wsgi --log-file -
